@@ -29,21 +29,20 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from "vuex";
+    import {mapGetters} from "vuex";
+    import movieClear from "../../middleware/movieClear";
 
     export default {
-      methods: {
-        ...mapActions("movie", ["setMovieDetail", "setRelativeMovieList"])
-      },
+      middlewares: ["movieClear"],
       computed: {
         ...mapGetters("movie", ["getMovie", "getMovies"]),
         runtime() {
           return Math.floor(this.getMovie.runtime / 60) + "시간 " + this.getMovie.runtime %  60 + "분";
         }
       },
-      async fetch() {
-        await this.setMovieDetail(this.$route.params.id);
-        await this.setRelativeMovieList(this.$route.params.id);
+      async asyncData({ store, route }) {
+        await store.dispatch("movie/setMovieDetail", route.params.id);
+        await store.dispatch("movie/setRelativeMovieList", route.params.id);
       }
     }
 </script>
