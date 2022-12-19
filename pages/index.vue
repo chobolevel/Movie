@@ -24,6 +24,7 @@
 
     export default {
       name: "index",
+      mixins: [movieMixin],
       methods: {
         ...mapActions("movie", ["setMovieList"]),
         handleClickImg(movie) {
@@ -32,8 +33,7 @@
       },
       async asyncData({ store }) {
         await store.dispatch("movie/setMovieList");
-      },
-      mixins: [movieMixin]
+      }
     }
 </script>
 
@@ -57,6 +57,12 @@
  ul li {
    text-align: center;
  }
+ ul li div.list-inner {
+   transition: all .3s;
+ }
+ ul li div.list-inner:hover {
+   transform: translateY(-10px);
+ }
  ul li div.image {
    position: relative;
    display: inline-block;
@@ -66,12 +72,8 @@
    width: 200px;
    height: 300px;
    border-radius: 10px;
-   transition: all .3s;
    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
    cursor: pointer;
- }
- ul li div.image img:hover {
-   transform: translateY(-10px);
  }
  ul li div.image span {
    position: absolute;

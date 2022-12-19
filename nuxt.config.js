@@ -1,6 +1,7 @@
 module.exports = {
   modules: [
-    "@nuxtjs/axios"
+    "@nuxtjs/axios",
+    "@nuxtjs/dotenv"
   ],
   /*
   ** Headers of the page
