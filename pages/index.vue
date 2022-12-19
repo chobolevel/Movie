@@ -38,6 +38,11 @@
 </script>
 
 <style scoped>
+ section {
+   width: 100%;
+   max-width: 1500px;
+   margin: 0 auto;
+ }
  p {
    font-size: 20px;
    font-weight: bold;
