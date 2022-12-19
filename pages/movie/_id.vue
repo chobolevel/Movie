@@ -129,6 +129,7 @@
   .relative-movies ul {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
   }
   .relative-movies ul li {
     text-align: center;
