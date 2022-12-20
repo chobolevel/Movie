@@ -1,5 +1,6 @@
 <template>
   <div class="paging-box">
+    <p class="cur-page-num">{{ getCurPageNum }}</p>
     <ul>
       <li class="prev" @click="handleClickPrev">🡸</li>
       <li v-for="(page, index) in range(getStartPage, getEndPage)" :key="index" v-if="page <= getTotalPageCount">
@@ -45,14 +46,18 @@ export default {
       }
       //api 호출 메서드
     },
-    handleClickPrev() {
+    async handleClickPrev() {
       if(this.getCurPageBlock !== 1) {
         this.setCurPageBlock(--this.getCurPageBlock);
+        await this.setParamsPage(this.getCurPageNum);
+        await this.setSearchMovieList(this.getParams);
       }
     },
-    handleClickNext() {
+    async handleClickNext() {
       if(this.getCurPageBlock < (Math.floor(this.getTotalPageCount / 10) + 1)) {
         this.setCurPageBlock(++this.getCurPageBlock);
+        await this.setParamsPage(this.getCurPageNum);
+        await this.setSearchMovieList(this.getParams);
       }
     }
   }
@@ -66,6 +71,12 @@ export default {
     margin: 0 auto;
     text-align: center;
     padding: 10px;
+  }
+  .cur-page-num {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 20px;
   }
   ul li {
     display: inline-block;

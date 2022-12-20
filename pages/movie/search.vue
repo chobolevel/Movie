@@ -4,26 +4,34 @@
       <form>
         <div class="search-options">
           <select v-model="sort_by" @change="handleChangeSortBy" v-show="getMovies.length > 0">
-            <option value="rating">별점</option>
-            <option value="title">제목</option>
-            <option value="year">연도</option>
+            <option value="rating">Rating</option>
+            <option value="title">Title</option>
+            <option value="year">Year</option>
           </select>
           <select v-model="order_by" @change="handleChangeOrderBy" v-show="getMovies.length > 0">
-            <option value="desc">내림차순</option>
-            <option value="asc">오름차순</option>
+            <option value="desc">Descending</option>
+            <option value="asc">Ascending</option>
           </select>
         </div>
         <div class="search-input">
           <select v-model="limit">
-            <option value="10">10개씩 보기</option>
-            <option value="20">20개씩 보기</option>
-            <option value="30">30개씩 보기</option>
-            <option value="40">40개씩 보기</option>
+            <option value="10">10 each</option>
+            <option value="20">20 each</option>
+            <option value="30">30 each</option>
+            <option value="40">40 each</option>
           </select>
-          <input type="text" v-model="query_term" placeholder="검색어를 입력하세요.">
-          <button @click="handleSearch">검색</button>
+          <input type="text" v-model="query_term" placeholder="Typing for here.....">
+          <button @click="handleSearch">SEARCH</button>
         </div>
       </form>
+    </div>
+
+    <div class="loading-view" v-if="getLoading">
+      wait a minute
+    </div>
+
+    <div class="not-found-view" v-if="getNotFound">
+      Nothing for search
     </div>
 
     <div class="list-box">
@@ -62,7 +70,7 @@ export default {
     }
   },
   async asyncData({ store }) {
-    await store.dispatch("movie/setMovieListClear");
+    await store.dispatch("movie/setMovieInit");
     await store.dispatch("paging/setPageCount", 0);
   },
   methods: {
@@ -74,13 +82,13 @@ export default {
       await this.$store.dispatch("paging/setPageCount", this.getMovieCount);
       await this.$store.dispatch("paging/setLimitPage", this.limit);
     },
-    handleChangeSortBy() {
-      this.setParamsSortBy(this.sort_by);
-      this.setSearchMovieList(this.getParams);
+    async handleChangeSortBy() {
+      await this.setParamsSortBy(this.sort_by);
+      await this.setSearchMovieList(this.getParams);
     },
-    handleChangeOrderBy() {
-      this.setParamsOrderBy(this.order_by);
-      this.setSearchMovieList(this.getParams);
+    async handleChangeOrderBy() {
+      await this.setParamsOrderBy(this.order_by);
+      await this.setSearchMovieList(this.getParams);
     },
     handlePosterClick(id) {
       this.$router.push(`/movie/${id}`);
@@ -114,7 +122,7 @@ export default {
     margin-right: 10px;
   }
   .search-input select {
-    width: 100px;
+    width: 80px;
     height: 30px;
     text-align: center;
     border: none;
@@ -122,7 +130,7 @@ export default {
     border-radius: 10px;
   }
   .search-input input {
-    width: 200px;
+    width: 250px;
     height: 30px;
     padding: 10px;
     border-radius: 10px;
@@ -131,7 +139,7 @@ export default {
     margin-left: 10px;
   }
   .search-input button {
-    width: 50px;
+    width: 60px;
     height: 30px;
     background-color: #ec3224;
     border: none;
@@ -144,6 +152,13 @@ export default {
   .search-input button:hover {
     background-color: white;
     color: #ec3224;
+  }
+  .loading-view, .not-found-view {
+    width: 100%;
+    padding: 100px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
   }
   .list-box {
     width: 90%;

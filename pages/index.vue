@@ -1,6 +1,6 @@
 <template>
     <section>
-      <p>전체 평점 순위</p>
+      <p>Total rating rank</p>
       <ul>
         <li v-for="(movie, index) in getMovies" :key="index">
           <div class="list-inner">

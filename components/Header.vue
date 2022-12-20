@@ -1,6 +1,6 @@
 <template>
     <header>
-      영화 이야기
+      Movie Story
     </header>
 </template>
 

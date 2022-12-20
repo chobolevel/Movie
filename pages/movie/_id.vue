@@ -4,16 +4,16 @@
         <div class="movie">
           <div>
             <img class="movie-poster" :src="getMovie.medium_cover_image" :alt="getMovie.title">
-            <a :href="getMovie.url" target="_blank">다운로드 또는 시청하기</a>
+            <a :href="getMovie.url" target="_blank">Download or Watch</a>
           </div>
           <div class="movie-detail">
             <p class="movie-title">{{ getMovie.title_english }}({{ getMovie.year }})</p>
             <p class="movie-desc">{{ getMovie.description_intro }}</p>
             <p class="movie-rating">⭐{{ getMovie.rating }}</p>
-            <p class="movie-language">언어({{ getMovie.language }})</p>
-            <p class="movie-duration">러닝타임({{ runtime }})</p>
+            <p class="movie-language">Language({{ getMovie.language }})</p>
+            <p class="movie-duration">Runtime({{ runtime }})</p>
             <fieldset>
-              <legend>장르</legend>
+              <legend>Genres</legend>
               <ul>
                 <li v-for="(genre, index) in getMovie.genres" :key="index">
                   {{ genre }}
@@ -43,7 +43,7 @@
       computed: {
         ...mapGetters("movie", ["getMovie", "getMovies"]),
         runtime() {
-          return Math.floor(this.getMovie.runtime / 60) + "시간 " + this.getMovie.runtime %  60 + "분";
+          return Math.floor(this.getMovie.runtime / 60) + "hour " + this.getMovie.runtime %  60 + "mins";
         }
       },
       methods: {

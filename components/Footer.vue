@@ -1,6 +1,6 @@
 <template>
     <footer>
-      <p>영화 이야기 &copy;{{new Date().getFullYear()}}</p>
+      <p>Movie Story &copy;{{new Date().getFullYear()}}</p>
     </footer>
 </template>
 

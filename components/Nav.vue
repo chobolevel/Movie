@@ -1,7 +1,7 @@
 <template>
     <nav>
-      <nuxt-link to="/">홈</nuxt-link>
-      <nuxt-link to="/movie/search">영화검색</nuxt-link>
+      <nuxt-link to="/">HOME</nuxt-link>
+      <nuxt-link to="/movie/search">SEARCH</nuxt-link>
     </nav>
 </template>
 
