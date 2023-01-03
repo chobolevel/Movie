@@ -113,7 +113,7 @@ export default {
     padding: 10px;
   }
   .search-options select {
-    width: 80px;
+    width: 100px;
     height: 30px;
     text-align: center;
     border-radius: 10px;
@@ -188,5 +188,6 @@ export default {
     display: block;
     color: #222;
     font-family: arial;
+    font-weight: bold;
   }
 </style>

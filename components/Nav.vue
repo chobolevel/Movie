@@ -2,6 +2,7 @@
     <nav>
       <nuxt-link to="/">HOME</nuxt-link>
       <nuxt-link to="/movie/search">SEARCH</nuxt-link>
+      <nuxt-link to="/user/kakao/login">LOGIN</nuxt-link>
     </nav>
 </template>
 
